@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: comfyui-outputs-pv
+  name: comfyui-outputs-pv-us-east-1
 spec:
   capacity:
     storage: 1200Gi # ignored, required
@@ -9,17 +9,17 @@ spec:
     - ReadWriteMany # supported options: ReadWriteMany / ReadOnlyMany
   mountOptions:
     - allow-delete
-    - region us-west-2
+    - region us-east-1
   csi:
     driver: s3.csi.aws.com # required
     volumeHandle: s3-csi-driver-volume-outputs # need to be unique
     volumeAttributes:
-      bucketName: comfyui-outputs-123456789012-us-west-2
+      bucketName: comfyui-outputs-058264393358-us-east-1
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: comfyui-outputs-pvc
+  name: comfyui-outputs-pvc-us-east-1
 spec:
   accessModes:
     - ReadWriteMany # supported options: ReadWriteMany / ReadOnlyMany
@@ -27,4 +27,4 @@ spec:
   resources:
     requests:
       storage: 1200Gi # ignored, required
-  volumeName: comfyui-outputs-pv
+  volumeName: comfyui-outputs-pv-us-east-1
